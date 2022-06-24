@@ -1,0 +1,24 @@
+/*!
+Theme Name: Frames
+Theme URI: https://frames.rubenmadila.com/
+Author: Ruben Madila
+Author URI: https://rubenmadila.com/
+Description: Frames, the goodness of Wordpress on a single theme
+Version: 0.6.0.8
+Tested up to: 5.8
+Requires PHP: 7.3
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: evergreen
+Github Theme URI: madila/frames
+Primary Branch: full-site-editing
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+*/
+
+
+/* Resetting some rules */
+.wp-block-site-title > a {text-decoration:none;}
