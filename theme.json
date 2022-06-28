@@ -1,9 +1,27 @@
 {
   "version": 2,
+  "customTemplates": [
+    {
+      "name": "blank",
+      "title": "Blank",
+      "postTypes": [
+        "page",
+        "post"
+      ]
+    }
+  ],
   "templateParts": [
     {
       "name": "header",
       "area": "header"
+    },
+    {
+      "name": "content-archive",
+      "area": "content"
+    },
+    {
+      "name": "content-page",
+      "area": "content"
     },
     {
       "name": "footer",
@@ -98,6 +116,10 @@
         {
           "size": "clamp(1.75rem, 3vw, 2.25rem)",
           "slug": "x-large"
+        },
+        {
+          "size": "clamp(2.5rem, 4vw, 4rem)",
+          "slug": "xx-large"
         }
       ],
       "fontFamilies": [
