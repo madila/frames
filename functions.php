@@ -9,6 +9,21 @@
  * @since Frames 1.0
  */
 
+
+if ( ! function_exists( 'get_theme_version' ) ) {
+	/**
+	 * Returns the theme version.
+	 *
+	 * @since Frames 1.0
+	 *
+	 * @return string
+	 */
+	function get_theme_version() {
+		return wp_get_theme()->get( 'Version' );
+	}
+
+}
+
 if ( ! function_exists( 'frames_setup' ) ) {
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -17,7 +32,7 @@ if ( ! function_exists( 'frames_setup' ) ) {
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 *
-	 * @since Twenty Twenty-One 1.0
+	 * @since Frames 1.0
 	 *
 	 * @return void
 	 */
@@ -150,7 +165,50 @@ add_action( 'after_setup_theme', 'frames_setup' );
  */
 function frames_scripts() {
 
-	wp_enqueue_style( 'frames-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'frames', get_stylesheet_uri(), array(), get_theme_version() );
+	wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/frames.min.js', array(), get_theme_version(), true );
 
 }
 add_action( 'wp_enqueue_scripts', 'frames_scripts' );
+
+function frames_category_title( $title ) {
+	if (is_category()) {
+		$title = single_cat_title('', false);
+	} elseif (is_tag()) {
+		$title = single_tag_title('', false);
+	} elseif (is_author()) {
+		$title = '<span>' . get_the_author() . '</span>';
+	} elseif (is_tax()) { //for custom post types
+		$title = sprintf(__('%1$s'), single_term_title('', false));
+	} elseif (is_post_type_archive()) {
+		$title = post_type_archive_title('', false);
+	}
+	return $title;
+}
+add_filter( 'get_the_archive_title', 'frames_category_title' );
+
+
+function frames_critical_css() {
+	?>
+	<style>
+        .wp-ready .wp-block-group:not(.critical) > * {
+            transition: opacity 300ms ease-out;
+        }
+        .wp-ready .wp-block-group:not(.critical) > *:not(.wp-block-shown-on-screen) {
+            opacity: 0;
+        }
+	</style>
+
+	<?php
+}
+
+add_action('wp_head', 'frames_critical_css');
+
+function frames_unlazy_featured_image( $filtered_image, $context, $attachment_id ) {
+    if(!str_contains($filtered_image, 'wp-post-image')) return $filtered_image;
+    return str_replace(' loading="lazy"', '', $filtered_image);
+}
+
+add_filter( 'wp_content_img_tag', 'frames_unlazy_featured_image', 99999, 3 );
+
+

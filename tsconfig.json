@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "outDir": "./build/",
+      "noImplicitAny": true,
+      "module": "esnext",
+      "target": "esnext",
+      "allowJs": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "useDefineForClassFields": false,
+      "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
