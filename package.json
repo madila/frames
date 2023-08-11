@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "esbuild src/js/frames.ts --bundle --minify --target=esnext --outfile=dist/js/frames.min.js",
+    "dev": "esbuild src/js/frames.ts --bundle --target=esnext --watch --outfile=dist/js/frames.js"
+  },
+  "dependencies": {
+    "esbuild": "0.18.3"
+  }
+}
