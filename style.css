@@ -32,11 +32,11 @@ Use it to make something cool, have fun, and share what you've learned.
     100% { opacity: 1; }
 }
 
-.wp-block-image img {
+.wp-site-blocks .wp-block-image img {
     opacity: 0;
 }
 
-.wp-block-image img.lazy-loaded {
+.wp-site-blocks .wp-block-image img.lazy-loaded {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
