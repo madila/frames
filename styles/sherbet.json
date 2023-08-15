@@ -108,6 +108,11 @@
 					"slug": "xx-large"
 				}
 			]
+		},
+		"custom": {
+			"theme": {
+				"name": "sherbet"
+			}
 		}
 	},
 	"styles": {

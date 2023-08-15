@@ -166,7 +166,7 @@ add_action( 'after_setup_theme', 'frames_setup' );
 function frames_scripts() {
 
     wp_enqueue_style( 'frames', get_stylesheet_uri(), array(), get_theme_version() );
-    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/frames.min.js', array(), get_theme_version(), true );
+    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/frames.js', array(), get_theme_version(), true );
 
 }
 add_action( 'wp_enqueue_scripts', 'frames_scripts' );
@@ -187,6 +187,14 @@ function frames_category_title( $title ) {
 }
 add_filter( 'get_the_archive_title', 'frames_category_title' );
 
+function get_active_frames_style_variation() {
+	$frames_variations = array_merge([false], WP_Theme_JSON_Resolver::get_style_variations());
+	$active_global_styles_id = WP_Theme_JSON_Resolver::get_user_global_styles_post_id();
+    $theme_data = WP_Theme_JSON_Resolver::get_user_data(); //json_decode(WP_Theme_JSON_Resolver::get_user_data_from_wp_global_styles( wp_get_theme('frames') )['post_content'], true);
+    print_r($theme_data); die();
+
+	return $frames_variations[$active_global_styles_id];
+}
 
 function frames_critical_css() {
     ?>
@@ -210,3 +218,11 @@ function frames_unlazy_featured_image( $filtered_image, $context, $attachment_id
 }
 
 add_filter( 'wp_content_img_tag', 'frames_unlazy_featured_image', 99999, 3 );
+
+
+function frames_body_classes($classes) {
+	return array_merge( $classes, array( sanitize_title('frames-style-'.$frame_variation['title']) ) );
+}
+
+
+//add_action('body_class', 'frames_body_classes', 999, 1);

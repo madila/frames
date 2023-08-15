@@ -86,3 +86,8 @@ Use it to make something cool, have fun, and share what you've learned.
     background-size: 5rem 5rem !important;
     background-position: 2.5rem 2.5rem, 0 0 !important;
 }
+
+html:not(.scrolled) header.is-position-sticky:has(#wp-site-header) {
+    background-color: rgba(0,0,0,0) !important;
+    transition: background-color 50ms linear;
+}

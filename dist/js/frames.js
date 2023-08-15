@@ -72,9 +72,9 @@
   var isListening = false;
   var isQueued = false;
   var isIdle = true;
-  var scrollY = window.pageYOffset;
+  var scrollY2 = window.pageYOffset;
   var scrollX = window.pageXOffset;
-  var scrollYCached = scrollY;
+  var scrollYCached = scrollY2;
   var scrollXCached = scrollX;
   var directionX = ["x", "horizontal"];
   var directionAll = ["any"];
@@ -91,11 +91,11 @@
       scrollX = window.scrollX;
     }
     if (callbackQueue.y.length || callbackQueue.any.length) {
-      scrollY = window.scrollY;
+      scrollY2 = window.scrollY;
     }
-    if (scrollY !== scrollYCached) {
+    if (scrollY2 !== scrollYCached) {
       callbackQueue.y.forEach(triggerCallback.y);
-      scrollYCached = scrollY;
+      scrollYCached = scrollY2;
       isScrollChanged = true;
     }
     if (scrollX !== scrollXCached) {
@@ -115,13 +115,13 @@
     callback3(scroll);
   }
   triggerCallback.y = function(callback3) {
-    triggerCallback(callback3, scrollY);
+    triggerCallback(callback3, scrollY2);
   };
   triggerCallback.x = function(callback3) {
     triggerCallback(callback3, scrollX);
   };
   triggerCallback.any = function(callback3) {
-    triggerCallback(callback3, [scrollX, scrollY]);
+    triggerCallback(callback3, [scrollX, scrollY2]);
   };
   function enableScrollListener() {
     if (isListening || isQueued) {
@@ -226,46 +226,89 @@
   var scrollTracker_default = scrollTracker;
 
   // src/js/frames.ts
+  function RGBAToHSL(r, g, b, a) {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r, g, b), cmax = Math.max(r, g, b), delta = cmax - cmin, h = 0, s = 0, l = 0;
+    if (delta == 0)
+      h = 0;
+    else if (cmax == r)
+      h = (g - b) / delta % 6;
+    else if (cmax == g)
+      h = (b - r) / delta + 2;
+    else
+      h = (r - g) / delta + 4;
+    h = Math.round(h * 60);
+    if (h < 0)
+      h += 360;
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+    return "hsla(" + h + "," + s + "%," + l + "%," + a + ")";
+  }
   var appBootstrap = class {
     lastScrollTop = 0;
     delta = 0;
+    style = "default";
+    color;
     header = null;
-    bodyScrolled = () => {
-      let { document: document2, scrollY: scrollY2 } = window, { documentElement } = document2;
-      let scrolled = (scrollY2 || documentElement.scrollTop) - (documentElement.clientTop || 0);
+    bodyScrolled = (scrolled = null) => {
+      let { document: document2, scrollY: scrollY3 } = window, { documentElement } = document2;
+      if (!scrolled) {
+        scrolled = (scrollY3 || documentElement.scrollTop) - (documentElement.clientTop || 0);
+      }
       if (scrolled > 1) {
         documentElement.classList.add("scrolled");
       } else {
         documentElement.classList.remove("scrolled");
       }
-      this.lastScrollTop = scrollY2;
+      this.lastScrollTop = scrollY3;
     };
-    colourise = () => {
-      let { header } = this, { document: document2, scrollY: scrollY2 } = window, { documentElement } = document2;
-      const max = 150;
-      if (scrollY2 > max)
+    colourise = (scrolled = null) => {
+      let { header } = this, { document: document2 } = window, { documentElement } = document2;
+      const max = 1e3;
+      if (scrolled > max)
         return;
-      let scrolled = (scrollY2 || documentElement.scrollTop) - (documentElement.clientTop || 0);
-      const opacity = scrollY2 / max;
+      if (!scrolled) {
+        scrolled = (scrollY || documentElement.scrollTop) - (documentElement.clientTop || 0);
+      }
+      if (scrolled < 10) {
+        header.style.transition = "background-color 200ms linear";
+      }
+      const opacity = scrolled / max;
+      let headerColor = RGBAToHSL(this.color[0], this.color[1], this.color[2], opacity.toFixed(2));
       if (header)
-        header.style.backgroundColor = `rgba(0,0,0,${opacity.toFixed(2)})`;
+        header.style.setProperty("background-color", headerColor, "important");
+    };
+    setThemeVariation = () => {
+      const themeStyle = getComputedStyle(document.body).getPropertyValue("--wp--custom--theme--name");
+      this.style = themeStyle || this.style;
     };
     constructor(header) {
-      let { bodyScrolled, colourise } = this;
+      let { bodyScrolled, colourise, setThemeVariation, style } = this;
+      this.header = header;
+      const headerColor = getComputedStyle(header).getPropertyValue("background-color");
+      const rgba = headerColor.includes("rgba") ? 5 : 4;
+      this.color = headerColor.substring(rgba, headerColor.length - 1).replace(/ /g, "").split(",");
+      setThemeVariation();
+      document.documentElement.classList.add(`frames-variation-${style}`);
       oculus_default();
       imageFade_default();
-      this.header = header;
+      if (header)
+        colourise();
       window.addEventListener("load", function() {
         document.documentElement.classList.add("wp-ready");
-        window.addEventListener("scrollend", bodyScrolled);
-        window.addEventListener("scroll", colourise);
       });
       scrollTracker_default("y", bodyScrolled);
+      if (header)
+        scrollTracker_default("y", colourise);
     }
   };
   document.addEventListener("DOMContentLoaded", function() {
-    const fixedHeader = document.querySelector(".is-fixed");
-    const app = new appBootstrap(fixedHeader);
-    app.bodyScrolled();
+    const stickyHeader = document.querySelector("header.has-background.is-position-sticky");
+    const app = new appBootstrap(stickyHeader);
+    app.bodyScrolled(null);
   });
 })();
