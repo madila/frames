@@ -1,3 +1,7 @@
 /node_modules/
 /node_modules/*
 /.idea/*
+.idea/frames.iml
+.idea/modules.xml
+.idea/php.xml
+.idea/vcs.xml
