@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"version": 2,
-	"title": "Pilgrimage",
+	"version": 3,
+	"title": "Classic",
 	"settings": {
 		"color": {
 			"duotone": [
@@ -73,6 +73,11 @@
 					"slug": "tertiary"
 				}
 			]
+		},
+		"custom": {
+			"theme": {
+				"name": "pilgramage"
+			}
 		}
 	},
 	"styles": {

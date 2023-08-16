@@ -1,10 +1,10 @@
 /*!
-Theme Name: Frames
+Theme Name: Frames - RC1
 Theme URI: https://frames.rubenmadila.com/
 Author: Ruben Madila
 Author URI: https://rubenmadila.com/
 Description: Frames, the goodness of Wordpress on a single theme
-Version: 0.6.1.0
+Version: 0.7.2.0
 Tested up to: 5.8
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
@@ -19,71 +19,76 @@ Use it to make something cool, have fun, and share what you've learned.
 
 */
 
-html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-    height: -webkit-fill-available;
-}
-
-body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-}
-
-nav.has-text-decoration-none a {
-    text-decoration: none;
-}
 
 /* Resetting some rules */
-.wp-block-site-title > a, h2 > a, h3 > a {text-decoration:none;}
+.wp-block-site-title > a {text-decoration:none;}
 
-.wp-block-site-logo {
-    overflow-clip-margin: content-box;
-    overflow: clip;
+/* Enable the full height column to ensure there is something to scrol through */
+.wp-block-column:has(.is-position-sticky) {
+    align-self: stretch;
 }
 
-.wp-block-navigation__responsive-container-close {
-    margin-top: calc(2rem + 24px);
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
-.wp-block-navigation__responsive-dialog {
-    max-width: var(--wp--style--global--content-size);
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.wp-block-button__link {
-    position: relative;
-}
-
-.wp-block-button__link:before {
-    content: "";
-    background-color: currentColor;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 100%;
-    bottom: 0;
-    z-index: 0;
+.wp-site-blocks .wp-block-image img {
     opacity: 0;
 }
 
-.wp-block-button__link:hover:before, .wp-block-button__link:focus:before {
-    right: 95%;
-    opacity: 0.6;
-    transition: all 300ms linear;
+.wp-site-blocks .wp-block-image img.lazy-loaded {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    opacity: initial;
+    animation: fadeIn 350ms ease-out 0;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
 }
 
-
-.is-position-sticky.is-fixed {
-    position: fixed;
-    width: 100%;
+.has-white-dotted-overlay-gradient-background {
+    background-size: 1rem 1rem !important;
+    background-repeat: round !important;
+    -webkit-mask-image: linear-gradient(rgb(0 0 0) 10%, rgb(0 0 0 / 0) 50%);
+    mask-image: linear-gradient(rgb(0 0 0) 10%, rgb(0 0 0 / 0) 50%);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
-html:not(.scrolled) .is-position-sticky.is-fixed header.wp-block-template-part > .wp-block-group {
-    background-color: transparent !important;
+.has-black-dotted-overlay-gradient-background {
+    background-size: 0.5rem 0.5rem !important;
+    background-repeat: round !important;
+    -webkit-mask-image: linear-gradient(rgb(0 0 0) 10%, rgb(0 0 0 / 0) 100%);
+    mask-image: linear-gradient(rgb(0 0 0) 10%, rgb(0 0 0 / 0) 100%);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
-.is-position-sticky.is-fixed header.wp-block-template-part > .wp-block-group {
-    transition: background 200ms linear;
+.has-black-dotted-overlay-gradient-background ~ .wp-block-cover__inner-container {
+    text-shadow: 2px 2px 0 black;
+}
+
+.has-white-dotted-xs-overlay-gradient-background {
+    background-size: 0.25rem 0.25rem !important;
+    background-repeat: round !important;
+}
+
+.has-black-dotted-xs-overlay-gradient-background {
+    background-size: 2rem 2rem !important;
+    background-repeat: round !important;
+}
+
+.has-dark-diamonds-xs-overlay-gradient-background, .has-button-pattern-overlay-gradient-background {
+    background-size: 5rem 5rem !important;
+    background-position: 2.5rem 2.5rem, 0 0 !important;
+}
+
+html:not(.scrolled) header.is-position-sticky:has(#wp-site-header) {
+    background-color: rgba(0,0,0,0) !important;
+    transition: background-color 50ms linear;
 }
