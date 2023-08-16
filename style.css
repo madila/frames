@@ -23,10 +23,6 @@ Use it to make something cool, have fun, and share what you've learned.
 /* Resetting some rules */
 .wp-block-site-title > a {text-decoration:none;}
 
-.wp-block-image:has(img[loading="lazy"]) {
-    background-color: rgba(255,255,255,0.1);
-}
-
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
