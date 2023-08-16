@@ -4,7 +4,7 @@ Theme URI: https://frames.rubenmadila.com/
 Author: Ruben Madila
 Author URI: https://rubenmadila.com/
 Description: Frames, the goodness of Wordpress on a single theme
-Version: 0.7.1.9
+Version: 0.7.2.0
 Tested up to: 5.8
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
@@ -22,6 +22,11 @@ Use it to make something cool, have fun, and share what you've learned.
 
 /* Resetting some rules */
 .wp-block-site-title > a {text-decoration:none;}
+
+/* Enable the full height column to ensure there is something to scrol through */
+.wp-block-column:has(.is-position-sticky) {
+    align-self: stretch;
+}
 
 @keyframes fadeIn {
     0% { opacity: 0; }

@@ -81,7 +81,7 @@ class appBootstrap {
             { document } = window,
             { documentElement } = document;
 
-        const max = 1000;
+        const max = 400;
 
         if(scrolled > max) return;
 
@@ -96,7 +96,7 @@ class appBootstrap {
         }
 
         const opacity = scrolled / max;
-        let headerColor = RGBAToHSL(this.color[0], this.color[1], this.color[2], opacity.toFixed(2) );
+        let headerColor = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${opacity.toFixed(2)} )`;
         if(header) header.style.setProperty("background-color", headerColor, "important");
     }
 
@@ -110,14 +110,9 @@ class appBootstrap {
 	constructor(header:HTMLElement) {
         let { bodyScrolled, colourise, setThemeVariation, style } = this;
 
-        this.header = header;
-        const headerColor = getComputedStyle(header).getPropertyValue("background-color");
-
-        // @ts-ignore
-        const rgba = headerColor.includes('rgba') ? 5 : 4;
-        this.color = headerColor.substring(rgba, headerColor.length-1)
-            .replace(/ /g, '')
-            .split(',');
+        window.addEventListener('load', function () {
+            document.documentElement.classList.add('wp-load');
+        });
 
         setThemeVariation();
         document.documentElement.classList.add(`frames-variation-${style}`);
@@ -126,15 +121,24 @@ class appBootstrap {
 
         imageFade();
 
-        if(header) colourise();
+        if(header) {
+            this.header = header;
+            const headerColor = getComputedStyle(header).getPropertyValue("background-color");
 
-		window.addEventListener('load', function () {
-			//console.timeEnd('Frames has loaded...');
+            // @ts-ignore
+            const rgba = headerColor.includes('rgba') ? 5 : 4;
+            this.color = headerColor.substring(rgba, headerColor.length-1)
+                .replace(/ /g, '')
+                .split(',');
+
+            colourise();
+        }
+
+        window.requestAnimationFrame(() => {
             document.documentElement.classList.add('wp-ready');
-		});
-
-        scrollTracker('y', bodyScrolled);
-        if(header) scrollTracker('y', colourise);
+            scrollTracker('y', bodyScrolled);
+            if(header) scrollTracker('y', colourise);
+        });
 
 	}
 }
