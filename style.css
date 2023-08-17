@@ -69,13 +69,14 @@ Use it to make something cool, have fun, and share what you've learned.
     mask-position: center;
 }
 
-.has-black-dotted-overlay-gradient-background ~ .wp-block-cover__inner-container {
-    text-shadow: 2px 2px 0 black;
-}
-
 .has-white-dotted-xs-overlay-gradient-background {
     background-size: 0.25rem 0.25rem !important;
     background-repeat: round !important;
+}
+
+.has-global-padding > .alignfull {
+    margin-right: calc(var(--wp--style--root--padding-right) * -1);
+    margin-left: calc(var(--wp--style--root--padding-left) * -1);
 }
 
 .has-black-dotted-xs-overlay-gradient-background {
