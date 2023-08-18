@@ -76,7 +76,12 @@ class appBootstrap {
         this.lastScrollTop = scrollY;
     };
 
-    colourise = (scrolled = null) => {
+    windowUnit = (event:Event) => {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    colourise = (scrolled:number|null = null) => {
         let { header } = this,
             { document } = window,
             { documentElement } = document;
@@ -108,7 +113,11 @@ class appBootstrap {
     }
 
 	constructor(header:HTMLElement) {
-        let { bodyScrolled, colourise, setThemeVariation, style } = this;
+        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style } = this;
+
+        windowUnit(null);
+
+        window.addEventListener('resize', windowUnit);
 
         window.addEventListener('load', function () {
             document.documentElement.classList.add('wp-load');
@@ -149,5 +158,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const app = new appBootstrap(stickyHeader as HTMLElement);
     app.bodyScrolled(null);
+    app.windowUnit();
 
 });

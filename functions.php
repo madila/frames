@@ -200,7 +200,7 @@ function frames_critical_css() {
     ?>
     <style>
         .wp-ready .wp-block-group:not(.critical) > * {
-            transition: opacity 300ms ease-out;
+            transition: 300ms ease-out;
         }
         .wp-ready .wp-block-group:not(.critical) > *:not(.wp-block-shown-on-screen) {
             opacity: 0;
