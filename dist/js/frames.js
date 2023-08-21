@@ -36,7 +36,7 @@
       }
     });
   };
-  var imageFade = (selector = ".wp-block-image img", options = {}) => {
+  var imageFade = (selector = ".wp-block-image img, .wp-post-image", options = {}) => {
     const templates = document.querySelectorAll(selector);
     if (templates.length > 0) {
       const myObserver = new IntersectionObserver(callback2, options);
@@ -226,89 +226,77 @@
   var scrollTracker_default = scrollTracker;
 
   // src/js/frames.ts
-  function RGBAToHSL(r, g, b, a) {
-    r /= 255;
-    g /= 255;
-    b /= 255;
-    let cmin = Math.min(r, g, b), cmax = Math.max(r, g, b), delta = cmax - cmin, h = 0, s = 0, l = 0;
-    if (delta == 0)
-      h = 0;
-    else if (cmax == r)
-      h = (g - b) / delta % 6;
-    else if (cmax == g)
-      h = (b - r) / delta + 2;
-    else
-      h = (r - g) / delta + 4;
-    h = Math.round(h * 60);
-    if (h < 0)
-      h += 360;
-    l = (cmax + cmin) / 2;
-    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-    s = +(s * 100).toFixed(1);
-    l = +(l * 100).toFixed(1);
-    return "hsla(" + h + "," + s + "%," + l + "%," + a + ")";
-  }
   var appBootstrap = class {
-    lastScrollTop = 0;
-    delta = 0;
-    style = "default";
-    color;
-    header = null;
-    bodyScrolled = (scrolled = null) => {
-      let { document: document2, scrollY: scrollY3 } = window, { documentElement } = document2;
-      if (!scrolled) {
-        scrolled = (scrollY3 || documentElement.scrollTop) - (documentElement.clientTop || 0);
-      }
-      if (scrolled > 1) {
-        documentElement.classList.add("scrolled");
-      } else {
-        documentElement.classList.remove("scrolled");
-      }
-      this.lastScrollTop = scrollY3;
-    };
-    colourise = (scrolled = null) => {
-      let { header } = this, { document: document2 } = window, { documentElement } = document2;
-      const max = 1e3;
-      if (scrolled > max)
-        return;
-      if (!scrolled) {
-        scrolled = (scrollY || documentElement.scrollTop) - (documentElement.clientTop || 0);
-      }
-      if (scrolled < 10) {
-        header.style.transition = "background-color 200ms linear";
-      }
-      const opacity = scrolled / max;
-      let headerColor = RGBAToHSL(this.color[0], this.color[1], this.color[2], opacity.toFixed(2));
-      if (header)
-        header.style.setProperty("background-color", headerColor, "important");
-    };
-    setThemeVariation = () => {
-      const themeStyle = getComputedStyle(document.body).getPropertyValue("--wp--custom--theme--name");
-      this.style = themeStyle || this.style;
-    };
     constructor(header) {
-      let { bodyScrolled, colourise, setThemeVariation, style } = this;
-      this.header = header;
-      const headerColor = getComputedStyle(header).getPropertyValue("background-color");
-      const rgba = headerColor.includes("rgba") ? 5 : 4;
-      this.color = headerColor.substring(rgba, headerColor.length - 1).replace(/ /g, "").split(",");
+      this.lastScrollTop = 0;
+      this.delta = 0;
+      this.style = "default";
+      this.header = null;
+      this.bodyScrolled = (scrolled = null) => {
+        let { document: document2, scrollY: scrollY3 } = window, { documentElement } = document2;
+        if (!scrolled) {
+          scrolled = (scrollY3 || documentElement.scrollTop) - (documentElement.clientTop || 0);
+        }
+        if (scrolled > 1) {
+          documentElement.classList.add("scrolled");
+        } else {
+          documentElement.classList.remove("scrolled");
+        }
+        this.lastScrollTop = scrollY3;
+      };
+      this.windowUnit = (event) => {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      };
+      this.colourise = (scrolled = null) => {
+        let { header } = this, { document: document2 } = window, { documentElement } = document2;
+        const max = 400;
+        if (scrolled > max)
+          return;
+        if (!scrolled) {
+          scrolled = (scrollY || documentElement.scrollTop) - (documentElement.clientTop || 0);
+        }
+        if (scrolled < 10) {
+          header.style.transition = "background-color 200ms linear";
+        }
+        const opacity = scrolled / max;
+        let headerColor = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${opacity.toFixed(2)} )`;
+        if (header)
+          header.style.setProperty("background-color", headerColor, "important");
+      };
+      this.setThemeVariation = () => {
+        const themeStyle = getComputedStyle(document.body).getPropertyValue("--wp--custom--theme--name");
+        this.style = themeStyle || this.style;
+      };
+      let { bodyScrolled, colourise, setThemeVariation, windowUnit, style } = this;
+      windowUnit(null);
+      window.addEventListener("resize", windowUnit);
+      window.addEventListener("load", function() {
+        document.documentElement.classList.add("wp-load");
+      });
       setThemeVariation();
       document.documentElement.classList.add(`frames-variation-${style}`);
       oculus_default();
       imageFade_default();
-      if (header)
+      if (header) {
+        this.header = header;
+        const headerColor = getComputedStyle(header).getPropertyValue("background-color");
+        const rgba = headerColor.includes("rgba") ? 5 : 4;
+        this.color = headerColor.substring(rgba, headerColor.length - 1).replace(/ /g, "").split(",");
         colourise();
-      window.addEventListener("load", function() {
+      }
+      window.requestAnimationFrame(() => {
         document.documentElement.classList.add("wp-ready");
+        scrollTracker_default("y", bodyScrolled);
+        if (header)
+          scrollTracker_default("y", colourise);
       });
-      scrollTracker_default("y", bodyScrolled);
-      if (header)
-        scrollTracker_default("y", colourise);
     }
   };
   document.addEventListener("DOMContentLoaded", function() {
     const stickyHeader = document.querySelector("header.has-background.is-position-sticky");
     const app = new appBootstrap(stickyHeader);
     app.bodyScrolled(null);
+    app.windowUnit();
   });
 })();

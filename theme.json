@@ -124,7 +124,7 @@
       "wideSize": "1224px"
     },
     "shadow": {
-      "defaultPresets": false,
+      "defaultPresets": true,
       "presets": [
         {
           "name": "Natural",
@@ -592,7 +592,8 @@
         "typography": {
           "fontSize": "var(--wp--preset--font-size--large)",
           "textTransform": "uppercase",
-          "fontWeight": "var(--wp--custom--font-weight--normal)"
+          "fontWeight": "var(--wp--custom--font-weight--normal)",
+          "textDecoration": "none"
         }
       }
     }
