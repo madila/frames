@@ -18,19 +18,24 @@
 			],
 			"gradients": [
 				{
-					"gradient": "linear-gradient(180deg, var(--wp--preset--color--primary) 0%,var(--wp--preset--color--secondary) 100%)",
-					"name": "Primary to Secondary",
-					"slug": "primary-secondary"
+					"gradient": "linear-gradient(144deg, var(--wp--preset--color--primary-300) 0%, var(--wp--preset--color--primary-500) 100%)",
+					"name": "Primary",
+					"slug": "primary"
 				},
 				{
-					"gradient": "linear-gradient(180deg, var(--wp--preset--color--secondary) 0%,var(--wp--preset--color--primary) 100%)",
-					"name": "Secondary to Primary",
-					"slug": "secondary-primary"
+					"gradient": "linear-gradient(144deg, var(--wp--preset--color--primary-500) 0%, var(--wp--preset--color--primary-700) 100%)",
+					"name": "Primary Dark",
+					"slug": "primary-dark"
 				},
 				{
-					"gradient": "linear-gradient(180deg, var(--wp--preset--color--primary) 0%,var(--wp--preset--color--tertiary) 100%)",
-					"name": "Tertiary to Secondary",
-					"slug": "tertiary-secondary"
+					"gradient": "linear-gradient(144deg, var(--wp--preset--color--secondary-300) 0%, var(--wp--preset--color--secondary-500) 100%)",
+					"name": "Secondary",
+					"slug": "secondary"
+				},
+				{
+					"gradient": "linear-gradient(144deg, var(--wp--preset--color--tertiary-300) 0%, var(--wp--preset--color--tertiary-500) 100%)",
+					"name": "Tertiary",
+					"slug": "tertiary"
 				},
 				{
 					"gradient": "linear-gradient(180deg, var(--wp--preset--color--tertiary) 0%,var(--wp--preset--color--primary) 100%)",
@@ -60,9 +65,19 @@
 					"slug": "contrast"
 				},
 				{
-					"color": "#0EA9AF",
-					"name": "Primary",
-					"slug": "primary"
+					"color": "#19a5dd",
+					"name": "Primary 300",
+					"slug": "primary-300"
+				},
+				{
+					"color": "#19628f",
+					"name": "Primary 500",
+					"slug": "primary-500"
+				},
+				{
+					"color": "#093b59",
+					"name": "Primary 700",
+					"slug": "primary-700"
 				},
 				{
 					"color": "#DDAF08",
@@ -70,9 +85,24 @@
 					"slug": "secondary"
 				},
 				{
-					"color": "#E974B0",
-					"name": "Tertiary",
-					"slug": "tertiary"
+					"color": "#673ab7",
+					"name": "Secondary 300",
+					"slug": "secondary-300"
+				},
+				{
+					"color": "#340d79",
+					"name": "Secondary 300",
+					"slug": "secondary-300"
+				},
+				{
+					"color": "#12c689",
+					"name": "Tertiary 300",
+					"slug": "tertiary-300"
+				},
+				{
+					"color": "#0b6a3b",
+					"name": "Tertiary 500",
+					"slug": "tertiary-500"
 				}
 			]
 		},
@@ -207,31 +237,28 @@
 			"button": {
 				":active": {
 					"color": {
-						"background": "var(--wp--preset--color--secondary)",
-						"gradient": "none"
+						"gradient": "var(--wp--preset--gradient--primary-dark)"
 					}
 				},
 				":focus": {
 					"color": {
-						"gradient": "var(--wp--preset--gradient--secondary-primary)"
+						"gradient": "var(--wp--preset--gradient--primary-dark)"
 					}
 				},
 				":hover": {
 					"color": {
-						"gradient": "var(--wp--preset--gradient--secondary-primary)"
-					}
-				},
-				":visited": {
-					"color": {
-						"text": "var(--wp--preset--color--base)"
+						"gradient": "var(--wp--preset--gradient--primary-dark)"
 					}
 				},
 				"border": {
 					"radius": "5px"
 				},
 				"color": {
-					"gradient": "var(--wp--preset--gradient--primary-secondary)",
+					"gradient": "var(--wp--preset--gradient--primary)",
 					"text": "var(--wp--preset--color--base)"
+				},
+				"typography": {
+					"fontWeight": "600"
 				}
 			}
 		}
