@@ -106,6 +106,81 @@
 				}
 			]
 		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFamily": "'Manrope', sans-serif, serif",
+					"name": "Manrope",
+					"slug": "manrope",
+					"fontFace": [
+						{
+							"fontFamily": "Manrope",
+							"fontStretch": "auto",
+							"fontStyle": "auto",
+							"fontWeight": "100 200 300 500 600 900",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./fonts/Manrope/Manrope-VariableFont_wght.woff2"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "'Overpass', sans-serif, serif",
+					"slug": "overpass",
+					"name": "Overpass",
+					"fontFace": [
+						{
+							"fontFamily": "Overpass",
+							"fontStretch": "auto",
+							"fontStyle": "auto",
+							"fontWeight": "100 200 300 500 600 900",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./fonts/Overpass/Overpass-VariableFont_wght.woff2"
+							]
+						},
+						{
+							"fontFamily": "Overpass",
+							"fontStretch": "auto",
+							"fontStyle": "italic",
+							"fontWeight": "100 200 300 500 600 900",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./fonts/Overpass/Overpass-Italic-VariableFont_wght.woff2"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "'DM Serif Display', sans-serif, serif",
+					"name": "DM Serif Display",
+					"slug": "dm-serif-display",
+					"fontFace": [
+						{
+							"fontFamily": "DM Serif Display",
+							"fontStretch": "auto",
+							"fontStyle": "auto",
+							"fontWeight": "500",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "DM Serif Display",
+							"fontStretch": "auto",
+							"fontStyle": "italic",
+							"fontWeight": "500",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./fonts/DM_Serif_Display/DMSerifDisplay-Regular.woff2"
+							]
+						}
+					]
+				}
+			]
+		},
 		"custom": {
 			"theme": {
 				"name": "classic"
@@ -123,6 +198,11 @@
 							}
 						}
 					}
+				}
+			},
+			"core/heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--dm-serif-display)"
 				}
 			},
 			"core/comment-date": {
@@ -220,6 +300,7 @@
 					}
 				},
 				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--dm-serif-display)",
 					"fontStyle": "italic",
 					"fontWeight": "700",
 					"textDecoration": "none"

@@ -121,3 +121,26 @@ html:not(.scrolled) header.is-position-sticky:has(#wp-site-header) {
     background-color: rgba(0,0,0,0) !important;
     transition: background-color 50ms linear;
 }
+
+
+.wp-block-navigation__responsive-dialog {
+    max-width: var(--wp--style--global--content-size);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-block-navigation__responsive-container-close {
+    margin-top: calc(2rem + 24px);
+}
+
+.wp-block-navigation__responsive-container-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+
+.woocommerce .woocommerce-breadcrumb {
+    margin: 0;
+}
