@@ -300,7 +300,7 @@
 					}
 				},
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--dm-serif-display)",
+					"fontFamily": "var(--wp--preset--font-family--manrope)",
 					"fontStyle": "italic",
 					"fontWeight": "700",
 					"textDecoration": "none"
