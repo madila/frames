@@ -166,10 +166,28 @@ add_action( 'after_setup_theme', 'frames_setup' );
 function frames_scripts() {
 
     wp_enqueue_style( 'frames', get_stylesheet_uri(), array(), get_theme_version() );
-    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/frames.js', array(), get_theme_version(), true );
+    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/theme/frames.js', array(), get_theme_version(), true );
 
 }
 add_action( 'wp_enqueue_scripts', 'frames_scripts' );
+
+
+function frames_block_editor_enqueue_scripts() {
+
+    if(!file_exists(get_template_directory().'/dist/js/block-library/index.asset.php')) return;
+
+	$assets = require_once('dist/js/block-library/index.asset.php');
+
+	// Enqueue the block index.js file
+	wp_enqueue_script(
+		'frames-block-filters', // unique handle
+		get_template_directory_uri() . '/dist/js/block-library/index.js',
+		$assets['dependencies'], // required dependencies for blocks
+		$assets['version']
+	);
+
+}
+add_action( 'enqueue_block_editor_assets', 'frames_block_editor_enqueue_scripts' );
 
 function frames_category_title( $title ) {
     if (is_category()) {
@@ -190,11 +208,45 @@ add_filter( 'get_the_archive_title', 'frames_category_title' );
 function frames_critical_css() {
     ?>
     <style>
-        .wp-ready .wp-block-group:not(.critical) > * {
-            transition: 300ms ease-out;
+        [animation] {
+            --frames--transition-duration: 300ms;
+            --frames--transition-timing-function: ease-out;
+            --frames--transition-delay: 0;
         }
-        .wp-ready .wp-block-group:not(.critical) > *:not(.wp-block-shown-on-screen) {
+        [animation]:not(.animated) {
             opacity: 0;
+        }
+        [animation].animated {
+            opacity: unset;
+            transition: var(--frames--transition-duration, 300ms) var(--frames--transition-timing-function, linear) var(--frames--transition-delay, 0);
+        }
+        [animation="scale-up"]:not(.animated) {
+            transform: scale(0.8);
+        }
+        [animation="scale-up"].animated {
+            transform: none;
+        }
+
+        [animation="slide-up"]:not(.animated) {
+            transform: translateY(25%);
+        }
+        [animation="slide-up"].animated,  {
+            transform: none;
+        }
+
+        [animation="slide-down"] {
+            transform: translateY(-25%);
+        }
+        [animation="slide-down"].animated {
+            transform: none;
+        }
+
+        .animated .animated {
+            --frames--transition-delay: 300ms;
+        }
+
+        .animated .animated .animated {
+            --frames--transition-delay: 600ms;
         }
     </style>
     <?php

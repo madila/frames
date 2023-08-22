@@ -5,14 +5,13 @@
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.style.willChange = "opacity";
-        entry.target.style.transitionDelay = order * 50 + "ms";
-        entry.target.classList.add("wp-block-shown-on-screen");
+        entry.target.classList.add("animated");
         observer.unobserve(entry.target);
         order++;
       }
     });
   };
-  var oculus = (selector = ".wp-block-template-part, .wp-block-cover__inner-container > *, .wp-block-column > *, .wp-block-group > *", options = {}) => {
+  var oculus = (selector = "[animation]", options = {}) => {
     const templates = document.querySelectorAll(selector);
     if (templates.length > 0) {
       const myObserver = new IntersectionObserver(callback, options);
@@ -29,7 +28,7 @@
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.style.willChange = "opacity";
-        entry.target.style.transitionDelay = order * 50 + "ms";
+        entry.target.style.transitionDelay = order * 10 + "ms";
         entry.target.classList.add("lazy-loaded");
         observer.unobserve(entry.target);
         order++;
@@ -226,7 +225,7 @@
   var scrollTracker_default = scrollTracker;
 
   // src/js/frames.ts
-  var appBootstrap = class {
+  var frames = class {
     constructor(header) {
       this.lastScrollTop = 0;
       this.delta = 0;
@@ -244,7 +243,7 @@
         }
         this.lastScrollTop = scrollY3;
       };
-      this.windowUnit = (event) => {
+      this.windowUnit = (event = null) => {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty("--vh", `${vh}px`);
       };
@@ -295,8 +294,8 @@
   };
   document.addEventListener("DOMContentLoaded", function() {
     const stickyHeader = document.querySelector("header.has-background.is-position-sticky");
-    const app = new appBootstrap(stickyHeader);
-    app.bodyScrolled(null);
-    app.windowUnit();
+    const site = new frames(stickyHeader);
+    site.bodyScrolled(null);
+    site.windowUnit();
   });
 })();

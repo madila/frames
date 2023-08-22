@@ -2,14 +2,16 @@ import oculus from './modules/oculus';
 import imageFade from './modules/imageFade';
 import scrollTracker from "./modules/scrollTracker";
 
-class appBootstrap {
+
+
+class frames {
     lastScrollTop : number = 0;
     delta: number = 0;
     style: string = 'default';
     color: string[];
     header:HTMLElement = null;
 
-    bodyScrolled = (scrolled = null) => {
+    bodyScrolled = (scrolled:Number|null = null) => {
 
         let { document, scrollY } = window,
             { documentElement } = document;
@@ -29,7 +31,7 @@ class appBootstrap {
         this.lastScrollTop = scrollY;
     };
 
-    windowUnit = (event:Event) => {
+    windowUnit = (event:Event|null = null) => {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
@@ -110,8 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const stickyHeader = document.querySelector('header.has-background.is-position-sticky');
 
-    const app = new appBootstrap(stickyHeader as HTMLElement);
-    app.bodyScrolled(null);
-    app.windowUnit();
+    const site = new frames(stickyHeader as HTMLElement);
+    site.bodyScrolled(null);
+    site.windowUnit();
+
 
 });

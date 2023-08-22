@@ -1,10 +1,15 @@
 {
   "scripts": {
-    "build": "esbuild src/js/frames.ts --bundle --minify --target=esnext --outfile=dist/js/frames.min.js",
-    "dev": "esbuild src/js/frames.ts --bundle --target=esnext --watch --outfile=dist/js/frames.js",
+    "build": "esbuild src/js/frames.ts --bundle --minify --target=esnext --outfile=dist/js/theme/frames.min.js",
+    "dev": "esbuild src/js/frames.ts --bundle --target=esnext --watch --outfile=dist/js/theme/frames.js",
+    "build-blocks": "wp-scripts build --webpack-src-dir=src/block-library --output-path=dist/js/block-library",
+    "dev-blocks": "wp-scripts start --webpack-src-dir=src/block-library --output-path=dist/js/block-library",
     "test" : "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "esbuild": "0.18.3"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^26.11.0"
   }
 }
