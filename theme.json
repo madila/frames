@@ -180,14 +180,23 @@
       "lineHeight": true,
       "textTransform": true,
       "dropCap": true,
+      "fluid": true,
       "fontSizes": [
         {
           "size": "0.85rem",
+          "fluid": {
+            "min": "0.75rem",
+            "max": "0.95rem"
+          },
           "name": "Extra Small",
           "slug": "extra-small"
         },
         {
           "size": ".9rem",
+          "fluid": {
+            "min": "0.9rem",
+            "max": "1.2rem"
+          },
           "slug": "small",
           "name": "Small"
         },

@@ -3,7 +3,7 @@ const callback = (entries: any[], observer: { unobserve: (arg0: any) => void; })
     entries.forEach((entry) => {
         if(entry.isIntersecting) {
             entry.target.style.willChange = "opacity";
-            entry.target.style.transitionDelay = (order * 50)+"ms";
+            entry.target.style.transitionDelay = (order * 10)+"ms";
             entry.target.classList.add("lazy-loaded");
             observer.unobserve(entry.target);
             order++;
