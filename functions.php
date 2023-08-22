@@ -212,33 +212,22 @@ function frames_critical_css() {
             --frames--transition-duration: 300ms;
             --frames--transition-timing-function: ease-out;
             --frames--transition-delay: 0;
+            transition: all var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
         }
         [animation]:not(.animated) {
             opacity: 0;
         }
-        [animation].animated {
-            opacity: unset;
-            transition: var(--frames--transition-duration, 300ms) var(--frames--transition-timing-function, linear) var(--frames--transition-delay, 0);
-        }
+
         [animation="scale-up"]:not(.animated) {
             transform: scale(0.8);
-        }
-        [animation="scale-up"].animated {
-            transform: none;
         }
 
         [animation="slide-up"]:not(.animated) {
             transform: translateY(25%);
         }
-        [animation="slide-up"].animated,  {
-            transform: none;
-        }
 
-        [animation="slide-down"] {
+        [animation="slide-down"]:not(.animated) {
             transform: translateY(-25%);
-        }
-        [animation="slide-down"].animated {
-            transform: none;
         }
 
         .animated .animated {
