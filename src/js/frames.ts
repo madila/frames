@@ -72,12 +72,13 @@ class frames {
         if(header) {
             this.header = header as HTMLElement;
         }
+        return this.header;
     }
 
 	constructor() {
         let { bodyScrolled, colourise, setThemeVariation, windowUnit, style, setHeader } = this;
 
-        setHeader();
+        const header = setHeader();
 
         windowUnit(null);
 
@@ -95,7 +96,6 @@ class frames {
         imageFade();
 
         if(header) {
-            this.header = header;
 
             const headerColor = getComputedStyle(header).getPropertyValue("background-color");
 
