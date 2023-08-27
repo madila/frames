@@ -67,8 +67,17 @@ class frames {
         this.style = themeStyle || this.style;
     }
 
-	constructor(header:HTMLElement) {
-        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style } = this;
+    setHeader() {
+        const header = document.querySelector('header.has-background.is-position-sticky.is-fixed');
+        if(header) {
+            this.header = header as HTMLElement;
+        }
+    }
+
+	constructor() {
+        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style, setHeader } = this;
+
+        setHeader();
 
         windowUnit(null);
 
@@ -110,9 +119,7 @@ class frames {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    const stickyHeader = document.querySelector('header.has-background.is-position-sticky');
-
-    const site = new frames(stickyHeader as HTMLElement);
+    const site = new frames();
     site.bodyScrolled(null);
     site.windowUnit();
 
