@@ -72,13 +72,12 @@ class frames {
         if(header) {
             this.header = header as HTMLElement;
         }
-        return this.header;
     }
 
 	constructor() {
-        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style, setHeader } = this;
+        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style, setHeader, header } = this;
 
-        const header = setHeader();
+        setHeader();
 
         windowUnit(null);
 
