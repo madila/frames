@@ -236,6 +236,24 @@ function frames_critical_css() {
             transform: translateX(25%);
         }
 
+
+        @keyframes slide-left {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(25%);
+                opacity: 0;
+            }
+        }
+
+        [animation="scroll-driven"].animated {
+            animation: auto linear both;
+            animation-name: slide-left;
+            animation-timeline: scroll(root block);
+        }
+
         [animation="slide-right"]:not(.animated) {
             transform: translateX(-25%);
         }
@@ -259,6 +277,8 @@ function frames_critical_css() {
         .animated .animated .animated .animated {
             --frames--transition-stagger: 2.3;
         }
+
+
 
     </style>
     <?php

@@ -30,6 +30,10 @@ Use it to make something cool, have fun, and share what you've learned.
 
 /* Input reset */
 
+.is-position-sticky:not(.wp-block).is-fixed {
+    position: fixed;
+    width: 100%;
+}
 
 select {
     font-family: inherit;
