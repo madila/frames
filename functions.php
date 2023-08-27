@@ -210,9 +210,10 @@ function frames_critical_css() {
     <style>
         [animation] {
             --frames--transition-properties: all;
-            --frames--transition-duration: 300ms;
-            --frames--transition-timing-function: cubic-bezier(0.6, 0.6, 0, 1);
+            --frames--transition-duration: 350ms;
+            --frames--transition-timing-function: ease-out;
             --frames--transition-delay: 0s;
+            --frames--transition-stagger: 1;
             transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
         }
         [animation]:not(.animated) {
@@ -231,13 +232,34 @@ function frames_critical_css() {
             transform: translateY(-25%);
         }
 
+        [animation="slide-left"]:not(.animated) {
+            transform: translateX(25%);
+        }
+
+        [animation="slide-right"]:not(.animated) {
+            transform: translateX(-25%);
+        }
+
         .animated .animated {
-            --frames--transition-delay: 300ms;
+            --frames--transition-delay: calc(var(--frames--transition-duration) * var(--frames--transition-stagger));
         }
 
         .animated .animated .animated {
-            --frames--transition-delay: var(--frames--transition-delay, 600ms);
+            --frames--transition-stagger: 1.3;
         }
+
+        .animated .animated .animated {
+            --frames--transition-stagger: 1.6;
+        }
+
+        .animated .animated .animated .animated {
+            --frames--transition-stagger: 2;
+        }
+
+        .animated .animated .animated .animated {
+            --frames--transition-stagger: 2.3;
+        }
+
     </style>
     <?php
 }

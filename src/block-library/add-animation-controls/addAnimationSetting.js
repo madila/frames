@@ -17,6 +17,8 @@ import {
 
 import { SelectControl } from '@wordpress/components';
 
+import { animations } from "./animations";
+
 const withAnimationSettings = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
 
@@ -37,13 +39,7 @@ const withAnimationSettings = createHigherOrderComponent( ( BlockEdit ) => {
                     <SelectControl
                         __nextHasNoMarginBottom
                         label={ __( 'Animation' ) }
-                        options={ [
-                            { label: __( 'None' ), value: '' },
-                            { label: __( 'Fade In' ), value: 'fade-in' },
-                            { label: __( 'Slide in upwards' ), value: 'slide-up' },
-                            { label: __( 'Slide in downwards' ), value: 'slide-down' },
-                            { label: __( 'Scale up' ), value: 'scale-up' },
-                        ] }
+                        options={ animations }
                         value={ animation }
                         onChange={ ( value ) =>
                             setAttributes( { animation: value } ) }
