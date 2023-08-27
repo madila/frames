@@ -144,3 +144,22 @@ html:not(.scrolled) header.is-position-sticky:has(#wp-site-header) {
 .woocommerce .woocommerce-breadcrumb {
     margin: 0;
 }
+
+
+body {
+    -webkit-print-color-adjust:exact;
+}
+
+.wp-site-blocks .wp-block-video figcaption, .wp-site-blocks .wp-block-image figcaption {
+    color: inherit;
+}
+
+mark {
+    padding: 0.05em 0.35em;
+    display: inline-block;
+    margin-top: 0.15em;
+}
+
+.swiper-zoom-container {
+    padding: 1rem;
+}
