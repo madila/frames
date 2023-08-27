@@ -209,10 +209,11 @@ function frames_critical_css() {
     ?>
     <style>
         [animation] {
+            --frames--transition-properties: all;
             --frames--transition-duration: 300ms;
-            --frames--transition-timing-function: ease-out;
-            --frames--transition-delay: 0;
-            transition: all var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
+            --frames--transition-timing-function: cubic-bezier(0.6, 0.6, 0, 1);
+            --frames--transition-delay: 0s;
+            transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
         }
         [animation]:not(.animated) {
             opacity: 0;
@@ -235,7 +236,7 @@ function frames_critical_css() {
         }
 
         .animated .animated .animated {
-            --frames--transition-delay: 600ms;
+            --frames--transition-delay: var(--frames--transition-delay, 600ms);
         }
     </style>
     <?php

@@ -4,7 +4,8 @@ export const enableOn = [
     'core/cover',
     'core/column',
     'core/heading',
-    'core/paragraph'
+    'core/paragraph',
+    'frames/frame'
 ];
 
 export const setAnimationAttribute = ( settings, name ) => {
