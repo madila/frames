@@ -166,7 +166,7 @@ add_action( 'after_setup_theme', 'frames_setup' );
 function frames_scripts() {
 
     wp_enqueue_style( 'frames', get_stylesheet_uri(), array(), get_theme_version() );
-    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/theme/frames.js', array(), get_theme_version(), true );
+    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/theme/frames.min.js', array(), get_theme_version(), true );
 
 }
 add_action( 'wp_enqueue_scripts', 'frames_scripts' );
