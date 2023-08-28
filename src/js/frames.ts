@@ -41,9 +41,12 @@ class frames {
             { document } = window,
             { documentElement } = document;
 
-        const max = 400;
+        const max = 600;
+        const opacity = scrolled / max;
 
-        if(scrolled > max) return;
+        console.log(opacity);
+
+        if(scrolled > max && opacity > 3) return;
 
         if(!scrolled) {
             scrolled =
@@ -51,11 +54,10 @@ class frames {
                 (documentElement.clientTop || 0);
         }
 
-        if(scrolled < 10) {
+        if(header && scrolled < 10) {
             header.style.transition = 'background-color 200ms linear';
         }
 
-        const opacity = scrolled / max;
         let headerColor = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${opacity.toFixed(2)} )`;
         if(header) header.style.setProperty("background-color", headerColor, "important");
     }
@@ -67,17 +69,11 @@ class frames {
         this.style = themeStyle || this.style;
     }
 
-    setHeader() {
-        const header = document.querySelector('header.has-background.is-position-sticky.is-fixed');
-        if(header) {
-            this.header = header as HTMLElement;
-        }
-    }
 
 	constructor() {
-        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style, setHeader, header } = this;
+        let { bodyScrolled, colourise, setThemeVariation, windowUnit, style } = this;
 
-        setHeader();
+        this.header = document.querySelector('.has-background.is-position-sticky.is-fixed-header');
 
         windowUnit(null);
 
@@ -94,9 +90,9 @@ class frames {
 
         imageFade();
 
-        if(header) {
+        if(this.header) {
 
-            const headerColor = getComputedStyle(header).getPropertyValue("background-color");
+            const headerColor = getComputedStyle(this.header).getPropertyValue("background-color");
 
             // @ts-ignore
             const rgba = headerColor.includes('rgba') ? 5 : 4;
@@ -110,7 +106,7 @@ class frames {
         window.requestAnimationFrame(() => {
             document.documentElement.classList.add('wp-ready');
             scrollTracker('y', bodyScrolled);
-            if(header) scrollTracker('y', colourise);
+            if(this.header) scrollTracker('y', colourise);
         });
 
 	}
