@@ -79,17 +79,6 @@ select {
     z-index: 20;
 }
 
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
-    align-items: var(--navigation-layout-justification-setting,inherit);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    overflow: visible;
-    padding-top: calc(2rem + 24px);
-    padding-left: var(--wp--preset--spacing--40);
-    scroll-padding-right: var(--wp--preset--spacing--40);
-}
-
 .has-white-dotted-overlay-gradient-background {
     background-size: 1rem 1rem !important;
     background-repeat: round !important;
@@ -137,25 +126,6 @@ html:not(.scrolled) header.is-position-sticky:has(#wp-site-header) {
     transition: background-color 50ms linear;
 }
 
-
-.wp-block-navigation__responsive-dialog {
-    max-width: var(--wp--style--global--content-size);
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.wp-block-navigation__responsive-container-close {
-    margin-top: calc(2rem + 24px);
-}
-
-.wp-block-navigation__responsive-container-close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-}
-
-
 .woocommerce .woocommerce-breadcrumb {
     margin: 0;
 }
@@ -173,4 +143,29 @@ mark {
     padding: 0.05em 0.35em;
     display: inline-block;
     margin-top: 0.15em;
+}
+
+
+/* Navigation Block */
+
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+    padding: calc(var(--wp--preset--spacing--50) + var(--wp-admin--admin-bar--position-offset, 0px)) var(--wp--preset--spacing--40);
+    scroll-padding-right: var(--wp--preset--spacing--40);
+}
+
+.wp-block-navigation__responsive-dialog {
+    max-width: var(--wp--style--global--content-size);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-block-navigation__responsive-container-close {
+    position: absolute;
+    right: var(--wp--preset--spacing--40);
+    top: calc(var(--wp--preset--spacing--50) + var(--wp-admin--admin-bar--position-offset, 0px));
+    z-index: 2;
+}
+
+.wp-block-navigation__responsive-close, .wp-block-navigation__responsive-dialog {
+    height: 100%;
 }

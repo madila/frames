@@ -65,6 +65,11 @@
 					"slug": "contrast"
 				},
 				{
+					"color": "#F6F6F6",
+					"name": "Light Base",
+					"slug": "light-base"
+				},
+				{
 					"color": "#19a5dd",
 					"name": "Primary 300",
 					"slug": "primary-300"
