@@ -236,6 +236,17 @@ function frames_critical_css() {
             transform: translateX(25%);
         }
 
+        .wp-block-cover.has-parallax[animation]:not(.animated) .wp-block-cover__image-background {
+            opacity: 0;
+        }
+
+
+        .wp-block-cover.has-parallax.animated .wp-block-cover__image-background {
+            --frames--transition-properties: all;
+            --frames--transition-duration: 300ms;
+            --frames--transition-delay: calc(var(--frames--transition-duration) * 2);
+            transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
+        }
 
         @keyframes slide-left {
             from {
