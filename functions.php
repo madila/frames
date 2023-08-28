@@ -278,7 +278,11 @@ function frames_critical_css() {
             --frames--transition-stagger: 2.3;
         }
 
-
+        @media (prefers-reduced-motion) {
+            .wp-site-blocks .animated {
+                --frames--transition-duration: 0s;
+            }
+        }
 
     </style>
     <?php

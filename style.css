@@ -79,6 +79,17 @@ select {
     z-index: 20;
 }
 
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+    align-items: var(--navigation-layout-justification-setting,inherit);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow: visible;
+    padding-top: calc(2rem + 24px);
+    padding-left: var(--wp--preset--spacing--40);
+    scroll-padding-right: var(--wp--preset--spacing--40);
+}
+
 .has-white-dotted-overlay-gradient-background {
     background-size: 1rem 1rem !important;
     background-repeat: round !important;
