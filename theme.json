@@ -208,14 +208,14 @@
           "name": "Base"
         },
         {
-          "size": "1.225rem",
-          "slug": "lead",
-          "name": "Lead"
+          "size": "1.25rem",
+          "slug": "medium",
+          "name": "Medium"
         },
         {
           "size": "1.4rem",
-          "slug": "medium",
-          "name": "Medium"
+          "slug": "lead",
+          "name": "Lead"
         },
         {
           "size": "1.75rem",
@@ -233,17 +233,17 @@
           "slug": "display"
         },
         {
-          "size": "3.5rem",
+          "size": "clamp(3.5rem, 4vw, 5rem)",
           "name": "Extra Display",
           "slug": "x-display"
         },
         {
-          "size": "clamp(4.5rem, 5vw, 6rem)",
+          "size": "clamp(4.5rem, 8vw, 5rem)",
           "name": "Huge",
           "slug": "huge"
         },
         {
-          "size": "clamp(5rem, 12vw, 12rem)",
+          "size": "clamp(6rem, 10vw, 12rem)",
           "name": "Extra Huge",
           "slug": "x-huge"
         }
