@@ -19,6 +19,32 @@ Use it to make something cool, have fun, and share what you've learned.
 
 */
 
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100lvh;
+    min-height: 100%;
+}
+
+.wp-block-site-logo {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+@media screen and (max-width: 768px) {
+    .wp-block-cover .wp-block-cover__image-background.has-parallax {
+        min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+        min-height: calc(var(--vh, 1vh) * 100);
+        min-height: 100lvh;
+        background-size: auto calc(var(--vh, 1vh) * 110);
+        background-size: auto 110lvh;
+        background-position: top center !important;
+    }
+}
 
 /* Resetting some rules */
 .wp-block-site-title > a {text-decoration:none;}
@@ -135,6 +161,12 @@ body {
     -webkit-print-color-adjust:exact;
 }
 
+@media print {
+    .hide-on-print {
+        display: none !important;
+    }
+}
+
 .wp-site-blocks .wp-block-video figcaption, .wp-site-blocks .wp-block-image figcaption {
     color: inherit;
 }
@@ -169,3 +201,8 @@ mark {
 .wp-block-navigation__responsive-close, .wp-block-navigation__responsive-dialog {
     height: 100%;
 }
+
+nav.has-text-decoration-none a {
+    text-decoration: none;
+}
+

@@ -213,7 +213,7 @@
           "name": "Lead"
         },
         {
-          "size": "1.425rem",
+          "size": "1.4rem",
           "slug": "medium",
           "name": "Medium"
         },
@@ -228,12 +228,12 @@
           "slug": "x-large"
         },
         {
-          "size": "clamp(2.6rem, 3vw, 3.8rem)",
+          "size": "3rem",
           "name": "Display",
           "slug": "display"
         },
         {
-          "size": "clamp(3.5rem, 4.5vw, 5rem)",
+          "size": "3.5rem",
           "name": "Extra Display",
           "slug": "x-display"
         },
@@ -241,6 +241,11 @@
           "size": "clamp(4.5rem, 5vw, 6rem)",
           "name": "Huge",
           "slug": "huge"
+        },
+        {
+          "size": "clamp(5rem, 12vw, 12rem)",
+          "name": "Extra Huge",
+          "slug": "x-huge"
         }
       ],
       "fontFamilies": [
