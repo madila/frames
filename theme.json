@@ -213,7 +213,7 @@
           "name": "Medium"
         },
         {
-          "size": "1.4rem",
+          "size": "1.5rem",
           "slug": "lead",
           "name": "Lead"
         },
@@ -238,12 +238,12 @@
           "slug": "x-display"
         },
         {
-          "size": "clamp(4.5rem, 8vw, 5rem)",
+          "size": "clamp(4.5rem, 7vw, 13rem)",
           "name": "Huge",
           "slug": "huge"
         },
         {
-          "size": "clamp(6rem, 10vw, 12rem)",
+          "size": "clamp(6rem, 11vw, 13rem)",
           "name": "Extra Huge",
           "slug": "x-huge"
         }
@@ -535,6 +535,16 @@
         "spacing": {
           "margin": {
             "bottom": "1rem"
+          }
+        }
+      },
+      "core/navigation": {
+        "elements": {
+          "link": {
+            "typography": {
+              "fontFamily": "var(--wp--preset--font-family--gantari)",
+              "fontSize": "var(--wp--preset--font-size--lead)"
+            }
           }
         }
       },

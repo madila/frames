@@ -109,7 +109,7 @@
 
 		"custom": {
 			"theme": {
-				"name": "classic"
+				"name": "modern"
 			}
 		}
 	},
@@ -165,9 +165,7 @@
 				"elements": {
 					"link": {
 						"typography": {
-							"fontFamily": "var(--wp--preset--font-family--gantari)",
-							"fontSize": "var(--wp--preset--font-size--large)",
-							"textDecoration": "none"
+							"fontSize": "var(--wp--preset--font-size--lead)"
 						}
 					}
 				}
@@ -215,12 +213,6 @@
 							"textDecoration": "underline"
 						}
 					}
-				}
-			},
-			"core/navigation-link": {
-				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--gantari)"
-
 				}
 			},
 			"core/page-list": {

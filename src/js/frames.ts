@@ -65,7 +65,7 @@ class frames {
     setThemeVariation = () => {
         const themeStyle = getComputedStyle(document.body)
             .getPropertyValue('--wp--custom--theme--name');
-
+        document.documentElement.classList.add(`frames-variation-${themeStyle}`);
         this.style = themeStyle || this.style;
     }
 
@@ -84,7 +84,6 @@ class frames {
         });
 
         setThemeVariation();
-        document.documentElement.classList.add(`frames-variation-${style}`);
 
 	    oculus();
 
