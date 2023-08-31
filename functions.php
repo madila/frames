@@ -216,8 +216,13 @@ function frames_critical_css() {
             --frames--transition-stagger: 1;
             transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
         }
+
         [animation]:not(.animated) {
             opacity: 0;
+        }
+
+        [animation="scale-up"]:not(.animated) {
+            transform: scale(0.8);
         }
 
         [animation="scale-up"]:not(.animated) {
@@ -236,6 +241,10 @@ function frames_critical_css() {
             transform: translateX(25%);
         }
 
+        [animation="slide-right"]:not(.animated) {
+            transform: translateX(-25%);
+        }
+
         .wp-block-cover.has-parallax[animation]:not(.animated) .wp-block-cover__image-background {
             opacity: 0;
         }
@@ -248,14 +257,24 @@ function frames_critical_css() {
             transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
         }
 
-        @keyframes slide-left {
+
+        @keyframes fade-in {
             from {
-                transform: translateX(0);
-                opacity: 1;
+                opacity: 0;
             }
             to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-left {
+            from {
                 transform: translateX(25%);
                 opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
 
@@ -263,10 +282,6 @@ function frames_critical_css() {
             animation: auto linear both;
             animation-name: slide-left;
             animation-timeline: scroll(root block);
-        }
-
-        [animation="slide-right"]:not(.animated) {
-            transform: translateX(-25%);
         }
 
         .animated .animated {
