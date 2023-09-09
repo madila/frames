@@ -3,7 +3,7 @@
 	"version": 2,
 	"title": "Classic",
 	"settings": {
-		"useRootPaddingAwareAlignments": true,
+		"useRootPaddingAwareAlignments": false,
 		"appearanceTools": true,
 		"color": {
 			"duotone": [

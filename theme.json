@@ -29,7 +29,7 @@
     }
   ],
   "settings": {
-    "useRootPaddingAwareAlignments": false,
+    "useRootPaddingAwareAlignments": true,
     "appearanceTools": true,
     "border": {
       "color": true,
