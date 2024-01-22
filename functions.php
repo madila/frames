@@ -166,28 +166,11 @@ add_action( 'after_setup_theme', 'frames_setup' );
 function frames_scripts() {
 
     wp_enqueue_style( 'frames', get_stylesheet_uri(), array(), get_theme_version() );
-    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/theme/frames.min.js', array(), get_theme_version(), true );
+    wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/frames.min.js', array(), get_theme_version(), true );
 
+    wp_enqueue_script( 'scroll-timeline', get_template_directory_uri().'/static/scroll-timeline.min.js', array(), get_theme_version(), false );
 }
 add_action( 'wp_enqueue_scripts', 'frames_scripts' );
-
-
-function frames_block_editor_enqueue_scripts() {
-
-    if(!file_exists(get_template_directory().'/dist/js/block-library/index.asset.php')) return;
-
-	$assets = require_once('dist/js/block-library/index.asset.php');
-
-	// Enqueue the block index.js file
-	wp_enqueue_script(
-		'frames-block-filters', // unique handle
-		get_template_directory_uri() . '/dist/js/block-library/index.js',
-		$assets['dependencies'], // required dependencies for blocks
-		$assets['version']
-	);
-
-}
-add_action( 'enqueue_block_editor_assets', 'frames_block_editor_enqueue_scripts' );
 
 function frames_category_title( $title ) {
     if (is_category()) {
@@ -205,116 +188,51 @@ function frames_category_title( $title ) {
 }
 add_filter( 'get_the_archive_title', 'frames_category_title' );
 
+
 function frames_critical_css() {
     ?>
     <style>
-        [animation] {
-            --frames--transition-properties: all;
-            --frames--transition-duration: 350ms;
-            --frames--transition-timing-function: ease-out;
-            --frames--transition-delay: 0s;
-            --frames--transition-stagger: 1;
-            transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
+        /* Makes sticky headers transparent when the window hasn't been scrolled. It's only set when the container of the #wp-site-header template is the header tag AND has position sticky.  */
+        header.has-background.is-position-sticky {
+            opacity: 0;
+            transition: none !important;
         }
 
-        [animation]:not(.animated) {
+        .wp-block-group:not(.critical) > *:not(.wp-block-shown-on-screen) {
+            transform: translateZ(0);
             opacity: 0;
         }
-
-        [animation="scale-up"]:not(.animated) {
-            transform: scale(0.8);
-        }
-
-        [animation="scale-up"]:not(.animated) {
-            transform: scale(0.8);
-        }
-
-        [animation="slide-up"]:not(.animated) {
-            transform: translateY(25%);
-        }
-
-        [animation="slide-down"]:not(.animated) {
-            transform: translateY(-25%);
-        }
-
-        [animation="slide-left"]:not(.animated) {
-            transform: translateX(25%);
-        }
-
-        [animation="slide-right"]:not(.animated) {
-            transform: translateX(-25%);
-        }
-
-        .wp-block-cover.has-parallax[animation]:not(.animated) .wp-block-cover__image-background {
+        .wp-site-blocks .wp-block-group:not(.critical) .wp-block-image img:not(.lazy-loaded) {
+            transform: translateZ(0);
             opacity: 0;
         }
-
-
-        .wp-block-cover.has-parallax.animated .wp-block-cover__image-background {
-            --frames--transition-properties: all;
-            --frames--transition-duration: 300ms;
-            --frames--transition-delay: calc(var(--frames--transition-duration) * 2);
-            transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
+        .wp-site-blocks .wp-template-part .wp-block-cover:has(.wp-block-cover__background) {
+            transform: translateZ(0);
+            opacity: 0;
+        }
+        .wp-block-image figcaption {
+            position: absolute;
+            bottom: 0;
+            padding: 1rem;
+            margin: 1rem 1.5rem;
+            border: 1px solid;
+            color: white;
+            border-radius: 7px;
         }
 
-
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .wp-block-image {
+            position: relative;
         }
 
-        @keyframes slide-left {
-            from {
-                transform: translateX(25%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .custom-logo-link {
+            display: block;
         }
-
-        [animation="scroll-driven"].animated {
-            animation: auto linear both;
-            animation-name: slide-left;
-            animation-timeline: scroll(root block);
-        }
-
-        .animated .animated {
-            --frames--transition-delay: calc(var(--frames--transition-duration) * var(--frames--transition-stagger));
-        }
-
-        .animated .animated .animated {
-            --frames--transition-stagger: 1.3;
-        }
-
-        .animated .animated .animated {
-            --frames--transition-stagger: 1.6;
-        }
-
-        .animated .animated .animated .animated {
-            --frames--transition-stagger: 2;
-        }
-
-        .animated .animated .animated .animated {
-            --frames--transition-stagger: 2.3;
-        }
-
-        @media (prefers-reduced-motion) {
-            .wp-site-blocks .animated {
-                --frames--transition-duration: 0s;
-            }
-        }
-
     </style>
+
     <?php
 }
 
-add_action('wp_head', 'frames_critical_css');
+add_action('wp_head', 'frames_critical_css', 1);
 
 function frames_unlazy_featured_image( $filtered_image, $context, $attachment_id ) {
     if(!str_contains($filtered_image, 'wp-post-image')) return $filtered_image;
