@@ -11,7 +11,7 @@ class frames {
     color: string[];
     header:HTMLElement = null;
 
-    bodyScrolled = (scrolled:Number|null = null) => {
+    bodyScrolled = (scrolled:number|null = null) => {
 
         let { document, scrollY } = window,
             { documentElement } = document;
@@ -22,7 +22,7 @@ class frames {
                 (documentElement.clientTop || 0);
         }
 
-        if (scrolled > 1) {
+        if(scrolled > 1) {
             documentElement.classList.add('scrolled');
         } else {
             documentElement.classList.remove('scrolled');
