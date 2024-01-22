@@ -167,7 +167,6 @@ function frames_scripts() {
 
 	wp_enqueue_style( 'frames', get_stylesheet_uri(), array(), get_theme_version() );
 	wp_enqueue_script( 'frames', get_template_directory_uri().'/dist/js/theme/frames.min.js', array(), get_theme_version(), true );
-
 	wp_enqueue_script( 'scroll-timeline', get_template_directory_uri().'/static/scroll-timeline.min.js', array(), get_theme_version(), false );
 }
 add_action( 'wp_enqueue_scripts', 'frames_scripts' );
@@ -189,6 +188,7 @@ function frames_block_editor_enqueue_scripts() {
 }
 add_action( 'enqueue_block_editor_assets', 'frames_block_editor_enqueue_scripts' );
 
+
 function frames_category_title( $title ) {
     if (is_category()) {
         $title = single_cat_title('', false);
@@ -205,9 +205,16 @@ function frames_category_title( $title ) {
 }
 add_filter( 'get_the_archive_title', 'frames_category_title' );
 
+
 function frames_critical_css() {
     ?>
     <style>
+        /* Makes sticky headers transparent when the window hasn't been scrolled. It's only set when the container of the #wp-site-header template is the header tag AND has position sticky.  */
+        header.has-background.is-position-sticky {
+            opacity: 0;
+            transition: none !important;
+        }
+
         [animation] {
             --frames--transition-properties: all;
             --frames--transition-duration: 350ms;
@@ -309,12 +316,29 @@ function frames_critical_css() {
                 --frames--transition-duration: 0s;
             }
         }
+        .wp-block-image figcaption {
+            position: absolute;
+            bottom: 0;
+            padding: 1rem;
+            margin: 1rem 1.5rem;
+            border: 1px solid;
+            color: white;
+            border-radius: 7px;
+        }
 
+        .wp-block-image {
+            position: relative;
+        }
+
+        .custom-logo-link {
+            display: block;
+        }
     </style>
+
     <?php
 }
 
-add_action('wp_head', 'frames_critical_css');
+add_action('wp_head', 'frames_critical_css', 1);
 
 function frames_unlazy_featured_image( $filtered_image, $context, $attachment_id ) {
     if(!str_contains($filtered_image, 'wp-post-image')) return $filtered_image;
