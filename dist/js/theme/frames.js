@@ -1,13 +1,11 @@
 (() => {
   // src/js/modules/oculus.ts
   var callback = (entries, observer) => {
-    let order = 0;
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.style.willChange = "opacity";
         entry.target.classList.add("animated");
         observer.unobserve(entry.target);
-        order++;
       }
     });
   };
@@ -226,7 +224,7 @@
 
   // src/js/frames.ts
   var frames = class {
-    constructor(header) {
+    constructor() {
       this.lastScrollTop = 0;
       this.delta = 0;
       this.style = "default";
@@ -249,37 +247,38 @@
       };
       this.colourise = (scrolled = null) => {
         let { header } = this, { document: document2 } = window, { documentElement } = document2;
-        const max = 400;
-        if (scrolled > max)
+        const max = 600;
+        const opacity = scrolled / max;
+        console.log(opacity);
+        if (scrolled > max && opacity > 3)
           return;
         if (!scrolled) {
           scrolled = (scrollY || documentElement.scrollTop) - (documentElement.clientTop || 0);
         }
-        if (scrolled < 10) {
+        if (header && scrolled < 10) {
           header.style.transition = "background-color 200ms linear";
         }
-        const opacity = scrolled / max;
         let headerColor = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${opacity.toFixed(2)} )`;
         if (header)
           header.style.setProperty("background-color", headerColor, "important");
       };
       this.setThemeVariation = () => {
         const themeStyle = getComputedStyle(document.body).getPropertyValue("--wp--custom--theme--name");
+        document.documentElement.classList.add(`frames-variation-${themeStyle}`);
         this.style = themeStyle || this.style;
       };
       let { bodyScrolled, colourise, setThemeVariation, windowUnit, style } = this;
+      this.header = document.querySelector(".has-background.is-position-sticky.is-fixed-header");
       windowUnit(null);
       window.addEventListener("resize", windowUnit);
       window.addEventListener("load", function() {
         document.documentElement.classList.add("wp-load");
       });
       setThemeVariation();
-      document.documentElement.classList.add(`frames-variation-${style}`);
       oculus_default();
       imageFade_default();
-      if (header) {
-        this.header = header;
-        const headerColor = getComputedStyle(header).getPropertyValue("background-color");
+      if (this.header) {
+        const headerColor = getComputedStyle(this.header).getPropertyValue("background-color");
         const rgba = headerColor.includes("rgba") ? 5 : 4;
         this.color = headerColor.substring(rgba, headerColor.length - 1).replace(/ /g, "").split(",");
         colourise();
@@ -287,14 +286,13 @@
       window.requestAnimationFrame(() => {
         document.documentElement.classList.add("wp-ready");
         scrollTracker_default("y", bodyScrolled);
-        if (header)
+        if (this.header)
           scrollTracker_default("y", colourise);
       });
     }
   };
   document.addEventListener("DOMContentLoaded", function() {
-    const stickyHeader = document.querySelector("header.has-background.is-position-sticky");
-    const site = new frames(stickyHeader);
+    const site = new frames();
     site.bodyScrolled(null);
     site.windowUnit();
   });

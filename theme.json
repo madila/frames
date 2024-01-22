@@ -1,33 +1,6 @@
 {
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
   "version": 3,
-  "customTemplates": [
-    {
-      "name": "blank",
-      "title": "Blank",
-      "postTypes": [
-        "page",
-        "post"
-      ]
-    }
-  ],
-  "templateParts": [
-    {
-      "name": "header",
-      "area": "header"
-    },
-    {
-      "name": "content-archive",
-      "area": "uncategorized"
-    },
-    {
-      "name": "content-page",
-      "area": "uncategorized"
-    },
-    {
-      "name": "footer",
-      "area": "footer"
-    }
-  ],
   "settings": {
     "useRootPaddingAwareAlignments": true,
     "appearanceTools": true,
@@ -46,12 +19,12 @@
       "text": true,
       "palette": [
         {
-          "color": "#000000",
+          "color": "#ffffff",
           "name": "Base",
           "slug": "base"
         },
         {
-          "color": "#ffffff",
+          "color": "#000000",
           "name": "Contrast",
           "slug": "contrast"
         },
@@ -131,7 +104,7 @@
     },
     "layout": {
       "contentSize": "980px",
-      "wideSize": "1224px"
+      "wideSize": "1280px"
     },
     "shadow": {
       "defaultPresets": true,
@@ -434,8 +407,8 @@
   },
   "styles": {
     "color": {
-      "background": "var(--wp--preset--color--black)",
-      "text": "var(--wp--preset--color--white)"
+      "background": "var(--wp--preset--color--base)",
+      "text": "var(--wp--preset--color--contrast)"
     },
     "typography": {
       "fontFamily": "var(--wp--preset--font-family--overpass)",
@@ -623,5 +596,37 @@
         }
       }
     }
-  }
+  },
+  "templateParts": [
+    {
+      "name": "header",
+      "area": "header",
+      "title": "Default Header"
+    },
+    {
+      "name": "content-archive",
+      "area": "uncategorized",
+      "title": "Default Archive Content"
+    },
+    {
+      "name": "content-page",
+      "area": "uncategorized",
+      "title":  "Default Page Content"
+    },
+    {
+      "name": "footer",
+      "area": "footer",
+      "title": "Default Footer"
+    }
+  ],
+  "customTemplates": [
+    {
+      "name": "blank",
+      "title": "Blank",
+      "postTypes": [
+        "page",
+        "post"
+      ]
+    }
+  ]
 }

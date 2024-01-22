@@ -11,7 +11,7 @@ class frames {
     color: string[];
     header:HTMLElement = null;
 
-    bodyScrolled = (scrolled:Number|null = null) => {
+    bodyScrolled = (scrolled:number|null = null) => {
 
         let { document, scrollY } = window,
             { documentElement } = document;
