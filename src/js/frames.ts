@@ -22,7 +22,7 @@ class frames {
                 (documentElement.clientTop || 0);
         }
 
-        if(scrolled > 1) {
+        if (scrolled > 1) {
             documentElement.classList.add('scrolled');
         } else {
             documentElement.classList.remove('scrolled');
@@ -70,7 +70,7 @@ class frames {
     }
 
 
-	constructor() {
+    constructor() {
         let { bodyScrolled, colourise, setThemeVariation, windowUnit, style } = this;
 
         this.header = document.querySelector('.has-background.is-position-sticky.is-fixed-header');
@@ -85,7 +85,7 @@ class frames {
 
         setThemeVariation();
 
-	    oculus();
+        oculus();
 
         imageFade();
 
@@ -108,7 +108,7 @@ class frames {
             if(this.header) scrollTracker('y', colourise);
         });
 
-	}
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function () {

@@ -198,17 +198,106 @@ function frames_critical_css() {
             transition: none !important;
         }
 
-        .wp-block-group:not(.critical) > *:not(.wp-block-shown-on-screen) {
-            transform: translateZ(0);
+        [animation] {
+            --frames--transition-properties: all;
+            --frames--transition-duration: 350ms;
+            --frames--transition-timing-function: ease-out;
+            --frames--transition-delay: 0s;
+            --frames--transition-stagger: 1;
+            transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
+        }
+
+        [animation]:not(.animated) {
             opacity: 0;
         }
-        .wp-site-blocks .wp-block-group:not(.critical) .wp-block-image img:not(.lazy-loaded) {
-            transform: translateZ(0);
+
+        [animation="scale-up"]:not(.animated) {
+            transform: scale(0.8);
+        }
+
+        [animation="scale-up"]:not(.animated) {
+            transform: scale(0.8);
+        }
+
+        [animation="slide-up"]:not(.animated) {
+            transform: translateY(25%);
+        }
+
+        [animation="slide-down"]:not(.animated) {
+            transform: translateY(-25%);
+        }
+
+        [animation="slide-left"]:not(.animated) {
+            transform: translateX(25%);
+        }
+
+        [animation="slide-right"]:not(.animated) {
+            transform: translateX(-25%);
+        }
+
+        .wp-block-cover.has-parallax[animation]:not(.animated) .wp-block-cover__image-background {
             opacity: 0;
         }
-        .wp-site-blocks .wp-template-part .wp-block-cover:has(.wp-block-cover__background) {
-            transform: translateZ(0);
-            opacity: 0;
+
+
+        .wp-block-cover.has-parallax.animated .wp-block-cover__image-background {
+            --frames--transition-properties: all;
+            --frames--transition-duration: 300ms;
+            --frames--transition-delay: calc(var(--frames--transition-duration) * 2);
+            transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
+        }
+
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-left {
+            from {
+                transform: translateX(25%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        [animation="scroll-driven"].animated {
+            animation: auto linear both;
+            animation-name: slide-left;
+            animation-timeline: scroll(root block);
+        }
+
+        .animated .animated {
+            --frames--transition-delay: calc(var(--frames--transition-duration) * var(--frames--transition-stagger));
+        }
+
+        .animated .animated .animated {
+            --frames--transition-stagger: 1.3;
+        }
+
+        .animated .animated .animated {
+            --frames--transition-stagger: 1.6;
+        }
+
+        .animated .animated .animated .animated {
+            --frames--transition-stagger: 2;
+        }
+
+        .animated .animated .animated .animated {
+            --frames--transition-stagger: 2.3;
+        }
+
+        @media (prefers-reduced-motion) {
+            .wp-site-blocks .animated {
+                --frames--transition-duration: 0s;
+            }
         }
         .wp-block-image figcaption {
             position: absolute;
