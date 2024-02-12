@@ -316,6 +316,7 @@ function frames_critical_css() {
                 --frames--transition-duration: 0s;
             }
         }
+
         .wp-block-image figcaption {
             position: absolute;
             bottom: 0;
@@ -332,6 +333,64 @@ function frames_critical_css() {
 
         .custom-logo-link {
             display: block;
+        }
+
+        @keyframes scroll-parallax {
+            from { transform: translateY(-10%); }
+            to { transform: translateY(10%); }
+        }
+
+        .wp-block-cover__image-background.has-parallax {
+            transform-origin: 0 50%;
+            transition: none !important;
+            animation: scroll-parallax auto linear;
+            animation-duration: 1ms;
+            animation-timeline: view();
+            backface-visibility: hidden;
+            transform: translateY(-20%);
+            width: auto;
+            max-width: none;
+            min-height: 130% !important;
+            background-size: cover;
+            top: -10%;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .wp-block-cover__image-background.has-parallax {
+                background-size: auto 120% !important;
+            }
+
+            .wp-block-cover__image-background.has-parallax .wp-block-cover {
+                position: relative;
+            }
+        }
+
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-left {
+            from {
+                transform: translateX(25%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        [animation="scroll-driven"].animated {
+            animation: auto linear both;
+            animation-name: slide-left;
+            animation-timeline: scroll(root block);
         }
     </style>
 
