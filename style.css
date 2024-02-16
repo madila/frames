@@ -214,8 +214,6 @@ nav.has-text-decoration-none a {
     .wp-block-cover__image-background.has-parallax {
         backface-visibility: hidden;
     }
-
-
 }
 
 @keyframes scroll-parallax {
