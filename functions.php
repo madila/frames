@@ -264,7 +264,6 @@ function frames_critical_css() {
             transition: var(--frames--transition-properties) var(--frames--transition-duration) var(--frames--transition-timing-function) var(--frames--transition-delay);
         }
 
-
         @keyframes fade-in {
             from {
                 opacity: 0;

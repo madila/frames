@@ -85,7 +85,7 @@ select {
     100% { opacity: 1; }
 }
 
-.wp-site-blocks .wp-block-image img {
+body:not(.editor-styles-wrapper) .wp-site-blocks .wp-block-image img {
     opacity: 0;
 }
 
@@ -207,18 +207,42 @@ nav.has-text-decoration-none a {
 
 /* .wp-block-cover */
 
-.wp-block-cover .wp-block-cover__image-background.has-parallax {
-    transition: none !important;
-    backface-visibility: hidden;
+.wp-block-cover {
+    overflow: hidden;
+    --translate: 100px;
+
+    .wp-block-cover__image-background.has-parallax {
+        backface-visibility: hidden;
+    }
+
+
 }
 
+@keyframes scroll-parallax {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(var(--translate) * -1)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .wp-block-cover__image-background.has-parallax {
+        transition: none !important;
+        height: calc(100% + var(--translate));
+        animation: scroll-parallax linear;
+        animation-duration: 1ms;
+        animation-timeline: scroll(root);
+        width: auto;
+        max-width: none;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
-    .wp-block-cover .wp-block-cover__image-background.has-parallax {
-        min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-        min-height: calc(var(--vh, 1vh) * 100);
-        min-height: 100lvh;
-        background-size: auto calc(var(--vh, 1vh) * 110);
-        background-size: auto 110lvh;
-        background-position: top center !important;
+
+    .wp-block-cover__image-background.has-parallax {
+        background-size: auto 120% !important;
+    }
+
+    .wp-block-cover__image-background.has-parallax .wp-block-cover {
+        position: relative;
     }
 }
